@@ -21,11 +21,12 @@ This will be added in a future release on `contributes.configuration` extension 
 Saving your last emulator selected from the list
 
 * `androidlauncher.enable`: enable/disable this extension
-* `androidlauncher.saveLastChoice`: enabling this will not ask for you to choose and emulator from the list next time
+* `androidlauncher.saveLastChoice`: enabling this will not ask for you to choose an emulator from the list next time
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+- List of avaliable Devices
+- Start an Android Emulator
 
 ### 1.0.0
 
