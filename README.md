@@ -2,9 +2,9 @@
 
 An Extension for VSCode to help you in your Android Development. This allow you to start and Emulator more easily.
 
-## Features
+## Instructions
 
-To Launch your prefered emulator, just press `Ctrl + Shift + P` and search for the command `Run Android Emulator` them press `Enter`. The list of avaliable emulator will show up on the screen, just select the one you want.
+To Launch your prefered emulator, press `Ctrl + Shift + P` and search for the command `Run Android Emulator` then press `Enter`. The list of avaliable emulator will show up on the screen, just select the one you want.
 
 ![print](https://user-images.githubusercontent.com/7622553/83316815-94e4a900-a1fe-11ea-9bb1-1c37cbe8badd.png)
 
@@ -12,7 +12,7 @@ To Launch your prefered emulator, just press `Ctrl + Shift + P` and search for t
 
 ## Requirements
 
-None so far.
+For Windows only.
 
 ## Extension Settings
 
