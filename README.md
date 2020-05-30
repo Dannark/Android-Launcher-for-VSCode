@@ -1,10 +1,10 @@
-# AndroidLauncher README
+# Android Emulator Launcher 
 
-An Extension for VSCode in order to Launch your Android Emulator easily.
+An Extension for VSCode to help you in your Android Development. This allow you to start and Emulator more easily.
 
 ## Features
 
-To Launch your prefered emulator, just pres `Ctrl + Shift + P` and search for the command `Run Android Emulator` them press `Enter`. The list of avaliable emulator will show up on the screen, juse select the one you want.
+To Launch your prefered emulator, just press `Ctrl + Shift + P` and search for the command `Run Android Emulator` them press `Enter`. The list of avaliable emulator will show up on the screen, juse select the one you want.
 
 > Tip: If you have just one Emulator, then it will be immediately Launched.
 
