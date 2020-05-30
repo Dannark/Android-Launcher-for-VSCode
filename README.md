@@ -1,6 +1,7 @@
 # Android Emulator Launcher 
 
 An Extension for VSCode to help you in your Android Development. This allow you to start and Emulator more easily.
+This extension is published at: https://marketplace.visualstudio.com/items?itemName=Dannark.AndroidLauncher
 
 ## Instructions
 
@@ -28,7 +29,7 @@ Saving your last emulator selected from the list
 - List of avaliable Devices
 - Start an Android Emulator
 
-### 1.0.0
+### 0.0.1
 
 Initial release of Android Launching Emulator
 
