@@ -29,6 +29,13 @@ function activate(context) {
 			
 			if (err) {
 				console.log('error: ' + err);
+				if(err.toString().startsWith("Error: Command failed: emulator -list-avds")){
+					vscode.window.showErrorMessage(`You haven't configured your environment variables ANDROID_HOME or ANDROID_SDK_HOME correctly in your system.`
+					+` Please refer this to: https://stackoverflow.com/questions/23042638/how-do-i-set-android-sdk-home-environment-variable`)
+				}
+				else{
+					vscode.window.showErrorMessage(""+ err)
+				}
 			}
 			else{
 				const emulatorList = stdout.trim().split('\n');
@@ -39,14 +46,14 @@ function activate(context) {
 				else if(emulatorList.length == 1 && emulatorList[0] != null || emulatorList[0] != ''){
 					const emulator = emulatorList[0]
 
-					launchEmu(emulator);
+					launchEmulator(emulator);
 				}
 				else{
 					//vscode.window.showWarningMessage('Select your Emulator from list.');
 					
 					const emulator = await vscode.window.showQuickPick(emulatorList);
 					
-					launchEmu(emulator);
+					launchEmulator(emulator);
 
 					
 				}
@@ -61,7 +68,20 @@ function activate(context) {
 		
 	});
 
+	let disposable2 = vscode.commands.registerCommand('AndroidLauncher.createandroid', async function () {
+		createEmulator();
+	});
+	let disposable3 = vscode.commands.registerCommand('AndroidLauncher.androidlist', async function () {
+		getListOfEmulators();
+	});
+	let disposable4 = vscode.commands.registerCommand('AndroidLauncher.deleteandroid', async function () {
+		deleteEmulator();
+	});
+
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable2);
+	context.subscriptions.push(disposable3);
+	context.subscriptions.push(disposable4);
 }
 exports.activate = activate;
 
@@ -73,7 +93,7 @@ module.exports = {
 	deactivate
 }
 
-function launchEmu(emuName){
+function launchEmulator(emuName){
 	cp.exec('emulator -avd '+emuName, (err, stdout, stderr) => {
 		console.log('stdout: ' + stdout);
 		console.log('stderr: ' + stderr);
@@ -113,5 +133,117 @@ function launchEmu(emuName){
 		});
 
 		return p;
+	});
+}
+
+async function createEmulator(){
+	//GET A LIST OF TARGETS
+	cp.exec(`sdkmanager --list`, async (err, stdout, stderr) => {
+		console.log('stdout: ' + stdout);
+		console.log('stderr: ' + stderr);
+		if (err) {
+			console.log('error: ' + err);
+			vscode.window.showErrorMessage(`Unable to get the list of targets. Did you configured your android environment variables?`);
+		}
+		else{
+			const installedPackages = stdout.substr(0, stdout.indexOf('Available Packages:'));
+			
+			if(installedPackages == undefined || installedPackages == null || installedPackages.length == 0){
+				vscode.window.showErrorMessage(`You don't have any Android Images in your computer, Please download them in AVD Manager from Android Studio.`);
+			}
+			else{
+				let targetList = installedPackages.trim().split('\n');
+			
+				targetList = targetList.filter((e,i) => {
+					return e.trim().startsWith('system-images')
+				}).map((e,i) =>{
+					const item = e.trim();
+					return item.substring(0,item.indexOf(' '))
+				})
+
+				let emuName = (await vscode.window.showInputBox({placeHolder:'Enter with the emulator name...'})).toString().trim().replace(' ','_')
+				if(emuName != undefined && emuName != null && emuName != ''){
+					emuName = emuName.toString().trim().replace(' ','_')
+
+					let target = await vscode.window.showQuickPick(targetList, {placeHolder:'Select the image to create:'})
+					const sdk_id = `${target}`;
+
+					if(sdk_id!= undefined){
+						const createCommand = `echo no | avdmanager create avd -n ${emuName} -k "${sdk_id}" -f`
+						cp.exec(createCommand, async (err, stdout, stderr) => {
+							console.log('stdout: ' + stdout);
+							console.log('stderr: ' + stderr);
+							if (err) {
+								console.log('error sdk_id: ' + err);
+								vscode.window.showErrorMessage(`Unable to create the emulator ${emuName}!`);
+							}
+							else{
+								vscode.window.showInformationMessage(`Emulator ${emuName} created sucesfully!`);
+							}
+						});
+						console.log("end of script: "+createCommand)
+					}
+					
+				}
+				else{
+					vscode.window.showErrorMessage(`Invalid Name.`);
+				}
+
+			}
+		}
+	});
+
+}
+
+async function getListOfEmulators(){
+	cp.exec("emulator -list-avds", async (err, stdout, stderr) => {
+		console.log('stdout: ' + stdout);
+		console.log('stderr: ' + stderr);
+		if (err) {
+			if(err.toString().startsWith("Error: Command failed: emulator -list-avds")){
+				vscode.window.showErrorMessage(`You haven't configured your environment variables ANDROID_HOME or ANDROID_SDK_HOME correctly in your system.`
+				+` Please refer this to: https://stackoverflow.com/questions/23042638/how-do-i-set-android-sdk-home-environment-variable`)
+			}
+			else{
+				vscode.window.showErrorMessage(""+ err)
+			}
+		}
+		else{
+			const emulatorList = stdout.trim().split('\n');
+			const emulator = await vscode.window.showQuickPick(emulatorList);
+		}
+	});
+}
+
+async function deleteEmulator(){
+	cp.exec("emulator -list-avds", async (err, stdout, stderr) => {
+		console.log('stdout: ' + stdout);
+		console.log('stderr: ' + stderr);
+		if (err) {
+			if(err.toString().startsWith("Error: Command failed: emulator -list-avds")){
+				vscode.window.showErrorMessage(`You haven't configured your environment variables ANDROID_HOME or ANDROID_SDK_HOME correctly in your system.`
+				+` Please refer this to: https://stackoverflow.com/questions/23042638/how-do-i-set-android-sdk-home-environment-variable`)
+			}
+			else{
+				vscode.window.showErrorMessage(""+ err)
+			}
+		}
+		else{
+			const emulatorList = stdout.trim().split('\n');
+			const emulator = await vscode.window.showQuickPick(emulatorList, {placeHolder:'Select the Emulator to be DELETED.'});
+
+			if(emulator != undefined){
+				cp.exec(`avdmanager delete avd -n ${emulator}`, async (err, stdout, stderr) => {
+					console.log('stdout: ' + stdout);
+					console.log('stderr: ' + stderr);
+					if (err) {
+						vscode.window.showErrorMessage("Ops! The emulator selected could not be deleted.")
+					}
+					else{
+						vscode.window.showInformationMessage(`AVD '${emulator}' deleted successfully.`);
+					}
+				});
+			}
+		}
 	});
 }

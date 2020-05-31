@@ -11,9 +11,15 @@ To Launch your prefered emulator, press `Ctrl + Shift + P` and search for the co
 
 > Tip: If you have just one, then it will be immediately Launched.
 
+*Comands:*
+* Create Android Emulator
+* List of Android Emulators 
+* Delete An Android Emulator
+
 ## Requirements
 
-For Windows only.
+* Android studio installed with environment variables configured. 
+* (Optional) Have at least one Emulator Created in AVD Manager. [Instructions here.](https://developer.android.com/studio/run/managing-avds) Or you can create one from this extension.
 
 ## Extension Settings
 
@@ -26,11 +32,16 @@ Saving your last emulator selected from the list
 
 ## Release Notes
 
-- List of avaliable Devices
-- Start an Android Emulator
+- Added useful information messages, log erros and links to guide your when something goes wrong.
+- Added Command: Create Android Emulator
+- Added Command: List of Android Emulators 
+- Added Command: Delete An Android Emulator
 
 ### 0.0.1
 
 Initial release of Android Launching Emulator
 
+### 0.0.3
+
+New features release are still in experimental stage
 -----------------------------------------------------------------------------------------------------------
