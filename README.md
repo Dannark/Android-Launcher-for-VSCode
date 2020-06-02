@@ -7,14 +7,14 @@ This extension is published at: https://marketplace.visualstudio.com/items?itemN
 
 To Launch your prefered emulator, press `Ctrl + Shift + P` and search for the command `Run Android Emulator` then press `Enter`. The list of avaliable emulator will show up on the screen, just select the one you want.
 
-![print](https://user-images.githubusercontent.com/7622553/83316815-94e4a900-a1fe-11ea-9bb1-1c37cbe8badd.png)
+![Extension](https://user-images.githubusercontent.com/7622553/83576529-5dc90d00-a508-11ea-8aa7-5c6befcd0966.gif)
 
 > Tip: If you have just one, then it will be immediately Launched.
 
 *Comands:*
-* Create Android Emulator
-* List of Android Emulators 
-* Delete An Android Emulator
+* `Run Android Emulator`
+* `Create Android Emulator`
+* `Delete An Android Emulator`
 
 ## Requirements
 
@@ -32,10 +32,7 @@ Saving your last emulator selected from the list
 
 ## Release Notes
 
-- Added useful information messages, log erros and links to guide your when something goes wrong.
-- Added Command: Create Android Emulator
-- Added Command: List of Android Emulators 
-- Added Command: Delete An Android Emulator
+Yeahhooh!
 
 ### 0.0.1
 
@@ -43,5 +40,14 @@ Initial release of Android Launching Emulator
 
 ### 0.0.3
 
-New features release are still in experimental stage
+- Added useful information messages, log erros and links to guide your when something goes wrong.
+- Added Command: `Create Android Emulator`
+- Added Command: `List of Android Emulators` 
+- Added Command: `Delete An Android Emulator`
+
+### 0.0.4
+
+* When creating an emulator, You can now Download the Android Image Packages from googles's Repository if you don't have any.
+* Command `List of Android Emulators` Removed.
+
 -----------------------------------------------------------------------------------------------------------

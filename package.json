@@ -2,7 +2,7 @@
 	"name": "AndroidLauncher",
 	"displayName": "Android Emulator Launcher",
 	"description": "Run Android emulator to test your apps from VSCode.",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"author": {
 		"name": "Daniel Queiroz"
 	},
@@ -33,12 +33,12 @@
 				"title": "Create Android Emulator"
 			},
 			{
-				"command": "AndroidLauncher.androidlist",
-				"title": "List of Android Emulators"
-			},
-			{
 				"command": "AndroidLauncher.deleteandroid",
 				"title": "Delete An Android Emulator"
+			},
+			{
+				"command": "AndroidLauncher.downloadtargetimages",
+				"title": "Download Android Images"
 			}
 		]
 	},
