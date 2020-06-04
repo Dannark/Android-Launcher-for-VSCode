@@ -2,12 +2,12 @@
 	"name": "AndroidLauncher",
 	"displayName": "Android Emulator Launcher",
 	"description": "Run Android emulator to test your apps from VSCode.",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"author": {
 		"name": "Daniel Queiroz"
 	},
 	"publisher": "Dannark",
-	"icon": "images/icon.png",
+	"icon": "images/logo_animated.gif",
 	"galleryBanner": {
 		"color": "#380e7f",
 		"theme": "dark"
@@ -37,8 +37,12 @@
 				"title": "Delete An Android Emulator"
 			},
 			{
-				"command": "AndroidLauncher.downloadtargetimages",
-				"title": "Download Android Images"
+				"command": "AndroidLauncher.focuswindows",
+				"title": "Enable Dedicated Android Emulator"
+			},
+			{
+				"command": "AndroidLauncher.stopfocuswindows",
+				"title": "Disable Dedicated Android Emulator"
 			}
 		]
 	},
@@ -58,15 +62,17 @@
 		"typescript": "^3.8.3",
 		"vscode-test": "^1.3.0"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"node-window-manager": "^2.2.3"
+	},
 	"license": "SEE LICENSE IN LICENSE.txt",
 	"homepage": "https://github.com/Dannark/Android-Launcher-for-VSCode/blob/master/README.md",
 	"bugs": {
 		"url": "https://github.com/Dannark/Android-Launcher-for-VSCode/issues",
 		"email": "dqpontes@gmail.com"
-	  },
-	  "repository": {
+	},
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/Dannark/Android-Launcher-for-VSCode.git"
-	  }
+	}
 }

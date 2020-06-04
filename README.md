@@ -1,7 +1,6 @@
 # Android Emulator Launcher 
 
 An Extension for VSCode to help you in your Android Development. This allow you to start and Emulator more easily.
-This extension is published at: https://marketplace.visualstudio.com/items?itemName=Dannark.AndroidLauncher
 
 ## Instructions
 
@@ -15,6 +14,13 @@ To Launch your prefered emulator, press `Ctrl + Shift + P` and search for the co
 * `Run Android Emulator`
 * `Create Android Emulator`
 * `Delete An Android Emulator`
+* `Enable Dedicated Android Emulator`
+* `Disable Dedicated Android Emulator`
+
+*Dedicated windows*
+
+This is follow the visual code windows focus and snap right to it
+![follow_windows2](https://user-images.githubusercontent.com/7622553/83795925-925ad700-a676-11ea-8f14-1839c13c2619.gif)
 
 ## Requirements
 
@@ -50,4 +56,7 @@ Initial release of Android Launching Emulator
 * When creating an emulator, You can now Download the Android Image Packages from googles's Repository if you don't have any.
 * Command `List of Android Emulators` Removed.
 
------------------------------------------------------------------------------------------------------------
+### 0.0.5
+
+- Displaying correct messages when no devices are available
+- Added Follow VSCode Windows focus and snap function.

@@ -19,17 +19,18 @@ function chooseEmulatorToLaunch(){
 		else{
 			const emulatorList = stdout.trim().split('\n');
 			
-			if(emulatorList != undefined){
-				if(emulatorList.length == 0){
-					vscode.window.showErrorMessage("No Emulators founds. Did you set up any?")
+			if(emulatorList){
+				if(emulatorList.length > 1){
+					const emulator = await vscode.window.showQuickPick(emulatorList);
+					if(emulator) launchEmulator(emulator);
+					
 				}
 				else if(emulatorList.length == 1 && emulatorList[0] != null && emulatorList[0] != ''){
 					const emulator = emulatorList[0]
 					launchEmulator(emulator);
 				}
 				else{
-					const emulator = await vscode.window.showQuickPick(emulatorList);
-					if(emulator != undefined) launchEmulator(emulator);
+					vscode.window.showWarningMessage("You have no emulators. Please Create one with the command: 'Create Android Emulator'");
 				}
 			}
 			else{
@@ -131,7 +132,7 @@ async function createEmulator(){
 						prompt:'Choose a unique name for your emulator',
 						placeHolder:'Emulator name...',
 						validateInput: text => {
-							return text.match(/[^a-zA-Z0-9]/) || text == '' ? "Invalid Name!" : null;
+							return text.match(/[^a-zA-Z0-9_]/) || text == '' ? "Invalid Name!" : null;
 						}
 					}))
 					if(emuName != undefined && emuName != null && emuName != ''){
@@ -153,7 +154,7 @@ async function createEmulator(){
 										vscode.window.showErrorMessage(msg.UNABLE_TO_CREATE_EMULATOR+` ${emuName}!`);
 									}
 									else{
-										vscode.window.showInformationMessage(`Emulator ${emuName} created sucesfully!`);
+										vscode.window.showInformationMessage(`Emulator ${emuName} created successfully!`);
 									}
 								});
 							}
@@ -236,8 +237,58 @@ async function deleteEmulator(){
 	});
 }
 
+let enableHotWindownsFocus = false;
+let attachedWindowsId = -1
+let attachedWindowsRectangle = null
+let refocusWindows = null;
+let previousFocusedWindowsId = -1;
+
+function focusWindows(canFocus){
+	const { windowManager } = require("node-window-manager")
+
+	const window = windowManager.getActiveWindow()
+
+	if(canFocus){
+		if(enableHotWindownsFocus == false){
+			enableHotWindownsFocus = true
+			attachedWindowsId = window.processId
+			attachedWindowsRectangle = window.getBounds()
+			
+			//loop
+			refocusWindows = setInterval(() => {
+				const currentWindow = windowManager.getActiveWindow();
+				if(currentWindow.processId == attachedWindowsId){
+					
+					const windowsList = windowManager.getWindows()
+					windowsList.map((emu,i) => {
+						if(emu.getTitle().startsWith('Android Emulator - Emulator')){
+							
+							if (currentWindow.processId != previousFocusedWindowsId
+									&& previousFocusedWindowsId != emu.processId) {
+								emu.bringToTop()
+								currentWindow.bringToTop()
+							}
+							windowManager.requestAccessibility();
+							emu.setBounds({ 
+								x: currentWindow.getBounds().x+currentWindow.getBounds().width});
+						}
+						return;
+					})
+				}
+				previousFocusedWindowsId = currentWindow.processId;
+				
+			}, 50);
+		}
+	}
+	else{
+		enableHotWindownsFocus = false
+		clearInterval(refocusWindows)
+	}
+}
+
 module.exports = {
 	chooseEmulatorToLaunch,
 	createEmulator,
-	deleteEmulator
+	deleteEmulator,
+	focusWindows
 };
