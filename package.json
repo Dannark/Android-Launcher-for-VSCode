@@ -2,7 +2,7 @@
 	"name": "AndroidLauncher",
 	"displayName": "Android Emulator Launcher",
 	"description": "Run Android emulator to test your apps from VSCode.",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"author": {
 		"name": "Daniel Queiroz"
 	},

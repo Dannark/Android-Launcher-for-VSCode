@@ -43,7 +43,7 @@ function chooseEmulatorToLaunch(){
 }
 
 function launchEmulator(emuName){
-	cp.exec('emulator -avd '+emuName, (err, stdout, stderr) => {
+	cp.exec('emulator -avd '+emuName+' -no-boot-anim', (err, stdout, stderr) => {
 		console.log('stdout: ' + stdout);
 		console.log('stderr: ' + stderr);
 		if (err) {
@@ -144,7 +144,7 @@ async function createEmulator(){
 							const sdk_id = `${target.label}`;
 							
 							if(sdk_id!= undefined){
-								const createCommand = `echo no | avdmanager create avd -n ${emuName} -k "${sdk_id}" -f`
+								const createCommand = `echo no | avdmanager create avd -n ${emuName} -k "${sdk_id}" -f --device "pixel"` //Nexus 4 | pixel
 								console.log('criando emulador: ' + createCommand);
 								cp.exec(createCommand, async (err, stdout, stderr) => {
 									console.log('stdout: ' + stdout);

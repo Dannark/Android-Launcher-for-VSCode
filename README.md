@@ -19,13 +19,14 @@ To Launch your prefered emulator, press `Ctrl + Shift + P` and search for the co
 
 *Dedicated windows*
 
-This is follow the visual code windows focus and snap right to it
+It follows the visual code window focus and snap right to it
 ![follow_windows2](https://user-images.githubusercontent.com/7622553/83795925-925ad700-a676-11ea-8f14-1839c13c2619.gif)
 
 ## Requirements
 
 * Android studio installed with environment variables configured. 
 * (Optional) Have at least one Emulator Created in AVD Manager. [Instructions here.](https://developer.android.com/studio/run/managing-avds) Or you can create one from this extension.
+* Make sure your system Virtualization (VT-x/AMD-V) is enabled in the bios [Instructions here.](https://github.com/Dannark/Android-Launcher-for-VSCode/issues/1#issuecomment-639128560)
 
 ## Extension Settings
 
@@ -38,25 +39,5 @@ Saving your last emulator selected from the list
 
 ## Release Notes
 
-Yeahhooh!
-
-### 0.0.1
-
-Initial release of Android Launching Emulator
-
-### 0.0.3
-
-- Added useful information messages, log erros and links to guide your when something goes wrong.
-- Added Command: `Create Android Emulator`
-- Added Command: `List of Android Emulators` 
-- Added Command: `Delete An Android Emulator`
-
-### 0.0.4
-
-* When creating an emulator, You can now Download the Android Image Packages from googles's Repository if you don't have any.
-* Command `List of Android Emulators` Removed.
-
-### 0.0.5
-
-- Displaying correct messages when no devices are available
-- Added Follow VSCode Windows focus and snap function.
+### 0.0.6
+See the changes log [here](https://marketplace.visualstudio.com/items/Dannark.AndroidLauncher/changelog).
