@@ -261,7 +261,7 @@ function focusWindows(canFocus){
 					
 					const windowsList = windowManager.getWindows()
 					windowsList.map((emu,i) => {
-						if(emu.getTitle().startsWith('Android Emulator - Emulator')){
+						if(emu.getTitle().startsWith('Android Emulator -')){
 							
 							if (currentWindow.processId != previousFocusedWindowsId
 									&& previousFocusedWindowsId != emu.processId) {

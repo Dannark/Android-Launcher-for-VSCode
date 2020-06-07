@@ -30,3 +30,7 @@ Initial release of Android Launching Emulator
 ## 0.0.6
 ### Fixed
 - When creating a new emulator the screens were too small, added flag to create them with Pixels skin.
+
+## 0.0.7
+### Fixed
+- Fixing Bug not snapping emulator to VScode windows
